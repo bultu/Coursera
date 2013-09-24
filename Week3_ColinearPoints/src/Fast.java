@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Fast {
 
     public static void main(String[] args) {
@@ -16,16 +18,38 @@ public class Fast {
                     pointSlopeList = new Double[points.length -1];
                     }
                     
-                    points[i] = new Point(in.readInt(), in.readInt()) ;
-                    
-                    if(i > 0)
-                    {
-                    pointSlopeList[i-1] = points[i].slopeTo(points[i-1]);
-                    }
-                    i++;
+                    points[i++] = new Point(in.readInt(), in.readInt()) ;
                   }
-                Quick3way.sort(pointSlopeList);
-               
+                
+                //Quick3way.sort(pointSlopeList);               
+                
+                Arrays.sort(points, points[0].SLOPE_ORDER);
+                for(int k = 0 ; k < points.length ; k++)
+                {
+                for(int j = k ; j < points.length && points.length - k >3 ; j++)
+                {
+                    if(j > 0)
+                    {
+                        pointSlopeList[j-1] = points[k].slopeTo(points[j]);
+                    }
+                                       
+                }
+                int flag = pointSlopeList.length;
+                int l = 0;
+                Quick3way.sort(pointSlopeList);    
+                while(flag > 0)
+                {
+                    System.out.print(pointSlopeList[l++] + "  ");
+                    flag--;
+                }
+                System.out.println();
+                
+                //interrupted by earthquake
+                }
+                
+                
+                
+                
 
             } catch (Exception ex) {
                 StdOut.println(ex.toString());
